@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { UserOutlined, DownloadOutlined } from '@ant-design/icons';
-import { Flex, Breadcrumb, Layout, Menu, theme, Space, Button, Input, Card, Typography } from 'antd';
+import { notification, Flex, Breadcrumb, Layout, Menu, theme, Space, Button, Input, Card, Typography, NotificationArgsProps } from 'antd';
 import { Link } from "react-router-dom";
 
 const {Header, Content, Footer} = Layout;
@@ -17,13 +17,26 @@ const cardStyle: React.CSSProperties = {
 const imgStyle: React.CSSProperties = {
     display: 'block',
 }
+// 图标
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
+// 位置
+type NotificationPlacement = NotificationArgsProps['placement']
 
 const LoginPage: React.FC = () => {
-    
+    const [api, contextHolder] = notification.useNotification();
+
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
     
+    // 提示信息
+    const openNotification = (type: NotificationType,placement: NotificationPlacement) => {
+        api[type]({
+          message: `登录成功`,
+          description: "success", placement
+        })
+    }
+
     return (
         <Layout style={{minHeight: '100vh'}}>
             <Header style={{display: 'flex', alignItems: 'center' }}>
@@ -56,7 +69,8 @@ const LoginPage: React.FC = () => {
                     }}
                     placeholder="input password" />
                     
-                    <Button type="primary">Login</Button>
+                    {contextHolder}
+                    <Button onClick= {() => openNotification('success','top')} type="primary">Login</Button>
                     <br></br>
                     <Card hoverable style={cardStyle} styles={{body: {padding: 0, overflow: 'hidden'}}}>
                         <Flex justify="space-between">

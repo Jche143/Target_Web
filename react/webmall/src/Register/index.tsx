@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { UserOutlined, DownloadOutlined } from '@ant-design/icons';
-import { Flex, Breadcrumb, Layout, Menu, theme, Space, Button, Input, Card, Typography } from 'antd';
+import { UserOutlined, DownloadOutlined} from '@ant-design/icons';
+import { notification, NotificationArgsProps, Flex, Breadcrumb, Layout, Menu, theme, Space, Button, Input, Card, Typography } from 'antd';
 import { Link } from "react-router-dom";
 
 const {Header, Content, Footer} = Layout;
@@ -18,11 +18,24 @@ const imgStyle: React.CSSProperties = {
     display: 'block',
 }
 
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
+
+type NotificationPlacement = NotificationArgsProps['placement'];
+
 const RegisterPage: React.FC = () => {
-    
+    const [api, contextHolder] = notification.useNotification();
+
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+
+    // 提示信息
+    const openNotification = (type: NotificationType ,placement: NotificationPlacement) => {
+        api[type]({
+          message:  `注册成功`,
+          description: "success", placement
+        })
+    }
     
     return (
         <Layout style={{minHeight: '100vh'}}>
@@ -41,10 +54,10 @@ const RegisterPage: React.FC = () => {
                     <Breadcrumb.Item>Home</Breadcrumb.Item>
                     <Breadcrumb.Item>Register</Breadcrumb.Item>
                 </Breadcrumb>
+                <Typography.Title level={3} style={{padding:'0 0'}}>
+                    注册
+                </Typography.Title>
                 <Space direction="vertical">
-                    <Typography.Title level={3} style={{padding:'0 0'}}>
-                        注册
-                    </Typography.Title>
                     <Input 
                     style={{
                         width:200,
@@ -56,7 +69,8 @@ const RegisterPage: React.FC = () => {
                     }}
                     placeholder="input password" />
                     
-                    <Button type="primary">Register</Button>
+                    {contextHolder}
+                    <Button onClick={() => openNotification('success','top')} type="primary">Register</Button>
                     <br></br>
                     <Card hoverable style={cardStyle} styles={{body: {padding: 0, overflow: 'hidden'}}}>
                         <Flex justify="space-between">
@@ -85,5 +99,7 @@ const RegisterPage: React.FC = () => {
         </Layout>
     )
 }
+
+
 
 export default RegisterPage;

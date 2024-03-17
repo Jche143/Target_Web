@@ -4,15 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LoginPage from './Login';
-import { BrowserRouter } from 'react-router-dom'
-import RegisterPage from './Register';
+import { BrowserRouter, Route, Routes  } from 'react-router-dom';import RegisterPage from './Register';
+import { Switch } from 'antd';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <BrowserRouter>
-    <RegisterPage />
+    <Routes>
+        <Route path="/" element={< RegisterPage />}></Route>
+        <Route path="/register" element={< RegisterPage />}></Route>
+        <Route path="/login" element={< LoginPage />}></Route>
+    </Routes>
   </BrowserRouter>
 );
 
