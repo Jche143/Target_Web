@@ -27,16 +27,25 @@ const LoginPage: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();
     const [message, setMessge] = useState('')
     const [passwd, setPasswd] = useState('')
+    const [post, setPost] = useState('')
+    const [err, setErr] = useState('')
 
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
     
     // 提示信息
-    const openNotification = (type: NotificationType,placement: NotificationPlacement) => {
+    const openSuccessNotification = (type: NotificationType,placement: NotificationPlacement) => {
         api[type]({
           message: `登录成功`,
           description: "success", placement
+        })
+    }
+
+    const openErrNotification = (type: NotificationType,placement: NotificationPlacement) => {
+        api[type]({
+          message: `登录失败`,
+          description: "error", placement
         })
     }
 
@@ -51,12 +60,18 @@ const LoginPage: React.FC = () => {
 
     // 登录接口处理
     function handleClick() {
-        openNotification('success','top')
-        console.log("123")
         console.log(message, passwd)
-        axios.get('/home',{})
+        axios.post('/login',{
+            username: message,
+            password: passwd,
+        })
         .then((res) => {
             console.log(res.data.message)
+            setPost(res.data)
+            openSuccessNotification('success','top')
+        }).catch((err) => {
+            setErr(err)
+            openErrNotification('error','top')
         })
     }
 
