@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserOutlined, DownloadOutlined } from '@ant-design/icons';
 import { notification, Flex, Breadcrumb, Layout, Menu, theme, Space, Button, Input, Card, Typography, NotificationArgsProps } from 'antd';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const {Header, Content, Footer} = Layout;
     
@@ -24,6 +25,8 @@ type NotificationPlacement = NotificationArgsProps['placement']
 
 const LoginPage: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();
+    const [message, setMessge] = useState('')
+    const [passwd, setPasswd] = useState('')
 
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -37,8 +40,29 @@ const LoginPage: React.FC = () => {
         })
     }
 
+    // 输入输出取值
+    const handleChange = (e: any) => {
+        setMessge(e.target.value)
+    }
+
+    const handleChange2 = (e: any) => {
+        setPasswd(e.target.value)
+    }
+
+    // 登录接口处理
+    function handleClick() {
+        openNotification('success','top')
+        console.log("123")
+        console.log(message, passwd)
+        axios.get('/home',{})
+        .then((res) => {
+            console.log(res.data.message)
+        })
+    }
+
     return (
         <Layout style={{minHeight: '100vh'}}>
+            
             <Header style={{display: 'flex', alignItems: 'center' }}>
             <div className="logo" />
             <Menu
@@ -49,29 +73,36 @@ const LoginPage: React.FC = () => {
                 style={{ flex:1, minWidth: 0 }}
             />
             </Header>
+
             <Content style={{ padding: '0 48px' }}>
+                {/* 索引 */}
                 <Breadcrumb style={{ margin: '16px 0' }}>
                     <Breadcrumb.Item>Home</Breadcrumb.Item>
                     <Breadcrumb.Item>Login</Breadcrumb.Item>
                 </Breadcrumb>
+                
                 <Typography.Title level={3} style={{padding:'0 0'}}>
                         登录
                 </Typography.Title>
+                
                 <Space direction="vertical">
+                    {/* 用户名 */}
                     <Input 
                     style={{
                         width:200,
-                    }} placeholder="username" prefix={<UserOutlined/>}/>
+                    }} onChange={handleChange} placeholder="username" prefix={<UserOutlined/>}/>
                     
+                    {/* 密码 */}
                     <Input.Password 
                     style={{
                         width:200,
                     }}
-                    placeholder="input password" />
+                    placeholder="input password"  onChange={handleChange2} />
                     
                     {contextHolder}
-                    <Button onClick= {() => openNotification('success','top')} type="primary">Login</Button>
+                    <Button onClick= {() => {handleClick()}} type="primary">Login</Button>
                     <br></br>
+                    
                     <Card hoverable style={cardStyle} styles={{body: {padding: 0, overflow: 'hidden'}}}>
                         <Flex justify="space-between">
                             <img
@@ -91,11 +122,14 @@ const LoginPage: React.FC = () => {
                             </Flex>
                         </Flex>
                     </Card>
+
                 </Space>
             </Content>
+
             <Footer style={{ textAlign: 'center' }}>
                 Page @{new Date().getFullYear()} created by Jche143 
             </Footer>
+
         </Layout>
     )
 }
