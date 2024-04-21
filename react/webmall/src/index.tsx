@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import LoginPage from './Login';
 import { BrowserRouter, Route, Routes  } from 'react-router-dom';import RegisterPage from './Register';
 import { Switch } from 'antd';
+import HomePage from './Home';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <Routes>
-        <Route path="/" element={< RegisterPage />}></Route>
+        <Route path="/" element={< HomePage />}></Route>
         <Route path="/register" element={< RegisterPage />}></Route>
         <Route path="/login" element={< LoginPage />}></Route>
     </Routes>
