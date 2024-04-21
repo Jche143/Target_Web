@@ -23,6 +23,17 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 // 位置
 type NotificationPlacement = NotificationArgsProps['placement']
 
+// 局部页面跳转按钮
+function SkipButton({skip, context}: {skip: string, context: string}) {
+    return (
+        <Link to={skip}>
+            <Button type="primary" size="large" shape="round">
+                {context}
+            </Button>
+        </Link>
+    )
+}
+
 const LoginPage: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();
     const [message, setMessge] = useState('')
@@ -35,17 +46,17 @@ const LoginPage: React.FC = () => {
     } = theme.useToken();
     
     // 提示信息
-    const openSuccessNotification = (type: NotificationType,placement: NotificationPlacement) => {
+    const openSuccessNotification = (type: NotificationType,placement: NotificationPlacement, message: string) => {
         api[type]({
           message: `登录成功`,
-          description: "success", placement
+          description: message, placement
         })
     }
 
-    const openErrNotification = (type: NotificationType,placement: NotificationPlacement) => {
+    const openErrNotification = (type: NotificationType,placement: NotificationPlacement, message: string) => {
         api[type]({
           message: `登录失败`,
-          description: "error", placement
+          description: message, placement
         })
     }
 
@@ -66,12 +77,11 @@ const LoginPage: React.FC = () => {
             password: passwd,
         })
         .then((res) => {
-            console.log(res.data.message)
             setPost(res.data)
-            openSuccessNotification('success','top')
+            openSuccessNotification('success','top', res.data.message)
         }).catch((err) => {
             setErr(err)
-            openErrNotification('error','top')
+            openErrNotification('error','top', err.response.data.message)
         })
     }
 
@@ -138,7 +148,11 @@ const LoginPage: React.FC = () => {
                         </Flex>
                     </Card>
 
+                    <br/>
+                    <SkipButton skip={`/`} context={`Back Home`}/>
+
                 </Space>
+
             </Content>
 
             <Footer style={{ textAlign: 'center' }}>

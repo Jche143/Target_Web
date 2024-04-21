@@ -23,6 +23,17 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 
+// 局部跳转按钮
+function SkipButton({skip, context}: {skip: string, context: string}) {
+    return (
+        <Link to={skip}>
+            <Button type="primary" size="large" shape="round">
+                {context}
+            </Button>
+        </Link>
+    )
+}
+
 const RegisterPage: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();
     const [username, setUsername] = React.useState('');
@@ -65,19 +76,19 @@ const RegisterPage: React.FC = () => {
     }
 
     const handleRigster = () => {
-        console.log("123")
+        // console.log("123")
         axios.post('/register',{
             username: username,
             password: password,
             name: nickname,
         })
         .then((res) => {
-            console.log(res.data.message)
+            // console.log(res.data.message)
             setPost(res.data)
             openSuccessNotification('success','top', res.data.message)
         }).catch((err) => {
             setErr(err)
-            console.log(err.response.data.message)
+            // console.log(err.response.data.message)
             openErrNotification('error','top', err.response.data.message)
         })
     }
@@ -151,6 +162,10 @@ const RegisterPage: React.FC = () => {
                             </Flex>
                         </Flex>
                     </Card>
+
+                    {/* 返回主页 */}
+                    <br/>
+                    <SkipButton context="Back Home" skip="/" />
                 </Space>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
