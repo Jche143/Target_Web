@@ -132,7 +132,7 @@ const LoginPage: React.FC = () => {
                         <Flex justify="space-between">
                             <img
                                 alt='avatar'
-                                src="http://sa6jipv2c.hn-bkt.clouddn.com/aoyin.jpg?e=1710156597&token=HRDXZQPk8TTSdfdE87ABDNFzzEsBYsQAb997fPTL:Wxyl65ohnLKTFPPzdT7HQ4K67G4="
+                                src="http://jche143.top/aoyin.jpg?e=1714224854&token=HRDXZQPk8TTSdfdE87ABDNFzzEsBYsQAb997fPTL:vk_Dq5E0biicoqq5g6pS7sm7UoY="
                                 style={imgStyle}
                             />
                             <Flex vertical align='flex-end' justify="space-between" style={{padding: 32}}>

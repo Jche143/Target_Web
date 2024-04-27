@@ -147,7 +147,7 @@ const RegisterPage: React.FC = () => {
                         <Flex justify="space-between">
                             <img
                                 alt='avatar'
-                                src="http://sa6jipv2c.hn-bkt.clouddn.com/make.jpg?e=1710159061&token=HRDXZQPk8TTSdfdE87ABDNFzzEsBYsQAb997fPTL:cbWfoQJyRa1skJO5n0g27yGUdzg="
+                                src="http://jche143.top/make.jpg?e=1714224908&token=HRDXZQPk8TTSdfdE87ABDNFzzEsBYsQAb997fPTL:jtUnoa7DHXPKoQtX2pafydmg_To="
                                 style={imgStyle}
                             />
                             <Flex vertical align='flex-end' justify="space-between" style={{padding: 32}}>
