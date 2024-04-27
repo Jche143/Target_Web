@@ -7,6 +7,7 @@ import LoginPage from './Login';
 import { BrowserRouter, Route, Routes  } from 'react-router-dom';import RegisterPage from './Register';
 import { Switch } from 'antd';
 import HomePage from './Home';
+import ShowPage from './Show';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +18,7 @@ root.render(
         <Route path="/" element={< HomePage />}></Route>
         <Route path="/register" element={< RegisterPage />}></Route>
         <Route path="/login" element={< LoginPage />}></Route>
+        <Route path="/show" element={< ShowPage />}></Route>
     </Routes>
   </BrowserRouter>
 );

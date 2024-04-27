@@ -72,7 +72,7 @@ const LoginPage: React.FC = () => {
     // 登录接口处理
     function handleClick() {
         console.log(message, passwd)
-        axios.post('/login',{
+        axios.post('/api/login',{
             username: message,
             password: passwd,
         })

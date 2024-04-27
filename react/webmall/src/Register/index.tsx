@@ -77,7 +77,7 @@ const RegisterPage: React.FC = () => {
 
     const handleRigster = () => {
         // console.log("123")
-        axios.post('/register',{
+        axios.post('/api/register',{
             username: username,
             password: password,
             name: nickname,
