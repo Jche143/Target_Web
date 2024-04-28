@@ -3,6 +3,7 @@ import { UserOutlined, DownloadOutlined } from '@ant-design/icons';
 import { notification, Flex, Breadcrumb, Layout, Menu, theme, Space, Button, Input, Card, Typography, NotificationArgsProps } from 'antd';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import loginshow from '../img/loginshow.jpg';
 
 const {Header, Content, Footer} = Layout;
     
@@ -132,7 +133,8 @@ const LoginPage: React.FC = () => {
                         <Flex justify="space-between">
                             <img
                                 alt='avatar'
-                                src="http://jche143.top:81//image/loginshow.jpg"
+                                src={loginshow}
+                                // src="http://jche143.top:81//image/loginshow.jpg"
                                 style={imgStyle}
                             />
                             <Flex vertical align='flex-end' justify="space-between" style={{padding: 32}}>

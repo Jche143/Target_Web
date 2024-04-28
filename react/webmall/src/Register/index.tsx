@@ -3,6 +3,7 @@ import { UserOutlined, KeyOutlined, SolutionOutlined} from '@ant-design/icons';
 import { notification, NotificationArgsProps, Flex, Breadcrumb, Layout, Menu, theme, Space, Button, Input, Card, Typography } from 'antd';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import registershow from '../img/registershow.jpg';
 
 const {Header, Content, Footer} = Layout;
     
@@ -147,7 +148,8 @@ const RegisterPage: React.FC = () => {
                         <Flex justify="space-between">
                             <img
                                 alt='avatar'
-                                src="http://jche143.top:81/image/registershow.jpg"
+                                src={registershow}
+                                // src="http://jche143.top:81/image/registershow.jpg"
                                 style={imgStyle}
                             />
                             <Flex vertical align='flex-end' justify="space-between" style={{padding: 32}}>
